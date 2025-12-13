@@ -14,23 +14,35 @@ export class UsersService {
     return createdUser.save();
   }
 
+  async findById(userId: string): Promise<User | null> {
+    return this.userModel.findById(userId).exec();
+  }
+
+  async findByEmail(email: string): Promise<User | null> {
+    return this.userModel.findOne({ email }).exec();
+  }
+
   async findBySupabaseId(supabaseId: string): Promise<User | null> {
     return this.userModel.findOne({ supabaseId }).exec();
   }
 
-  async findOrCreate(supabaseId: string, email: string): Promise<User> {
-    let user = await this.findBySupabaseId(supabaseId);
+  async findOrCreate(userId: string, email: string): Promise<User> {
+    let user = await this.findById(userId);
 
     if (!user) {
-      user = await this.create({ supabaseId, email });
+      user = await this.findByEmail(email);
+
+      if (!user) {
+        user = await this.create({ email });
+      }
     }
 
     return user;
   }
 
-  async update(supabaseId: string, updateUserDto: UpdateUserDto): Promise<User> {
+  async update(userId: string, updateUserDto: UpdateUserDto): Promise<User> {
     return this.userModel
-      .findOneAndUpdate({ supabaseId }, updateUserDto, { new: true })
+      .findByIdAndUpdate(userId, updateUserDto, { new: true })
       .exec();
   }
 

@@ -5,11 +5,20 @@ export type UserDocument = User & Document;
 
 @Schema({ timestamps: true })
 export class User {
-  @Prop({ required: true, unique: true })
-  supabaseId: string;
+  @Prop({ sparse: true, unique: true })
+  supabaseId?: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   email: string;
+
+  @Prop()
+  password?: string;
+
+  @Prop()
+  googleId?: string;
+
+  @Prop({ enum: ['email', 'google', 'supabase_legacy'], default: 'email' })
+  authProvider: string;
 
   @Prop()
   name: string;

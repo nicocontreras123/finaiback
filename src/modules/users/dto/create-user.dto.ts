@@ -1,9 +1,9 @@
 import { IsEmail, IsNotEmpty, IsOptional, IsString, IsNumber, IsArray } from 'class-validator';
 
 export class CreateUserDto {
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  supabaseId: string;
+  supabaseId?: string;
 
   @IsEmail()
   @IsNotEmpty()
