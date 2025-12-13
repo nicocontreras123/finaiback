@@ -1,14 +1,6 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString, IsNumber, IsArray } from 'class-validator';
+import { IsOptional, IsString, IsNumber, IsArray, IsBoolean } from 'class-validator';
 
-export class CreateUserDto {
-  @IsNotEmpty()
-  @IsString()
-  supabaseId: string;
-
-  @IsEmail()
-  @IsNotEmpty()
-  email: string;
-
+export class UpdateUserDto {
   @IsOptional()
   @IsString()
   name?: string;
@@ -48,4 +40,20 @@ export class CreateUserDto {
   @IsOptional()
   @IsArray()
   equipment?: string[];
+
+  @IsOptional()
+  @IsBoolean()
+  voiceEnabled?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  timerSoundEnabled?: boolean;
+
+  @IsOptional()
+  @IsNumber()
+  prepTimeMinutes?: number;
+
+  @IsOptional()
+  @IsNumber()
+  prepTimeSeconds?: number;
 }
