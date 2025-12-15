@@ -15,7 +15,7 @@ import { User, UserSchema } from '../users/entities/user.schema';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'),
-        signOptions: { expiresIn: '7d' },
+        signOptions: { expiresIn: '90d' }, // 90 días como apps deportivas (Strava, Nike Run Club, etc.)
       }),
       inject: [ConfigService],
     }),

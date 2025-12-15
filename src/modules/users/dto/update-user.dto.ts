@@ -26,12 +26,19 @@ export class UpdateUserDto {
   gender?: string;
 
   @IsOptional()
-  @IsArray()
-  sports?: string[];
+  sports?: string | string[];
 
   @IsOptional()
-  @IsArray()
-  goals?: string[];
+  sport?: string;
+
+  @IsOptional()
+  deportes?: string[];
+
+  @IsOptional()
+  goals?: string | string[];
+
+  @IsOptional()
+  availableDays?: string[];
 
   @IsOptional()
   @IsArray()
@@ -56,4 +63,12 @@ export class UpdateUserDto {
   @IsOptional()
   @IsNumber()
   prepTimeSeconds?: number;
+
+  @IsOptional()
+  @IsBoolean()
+  hasCompletedOnboarding?: boolean;
+
+  @IsOptional()
+  @IsNumber()
+  trainingDaysPerWeek?: number;
 }

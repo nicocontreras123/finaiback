@@ -157,7 +157,7 @@ export class AuthService {
 
     return this.jwtService.sign(payload, {
       secret: this.configService.get<string>('JWT_SECRET'),
-      expiresIn: '7d',
+      expiresIn: '90d', // 90 días como apps deportivas
     });
   }
 

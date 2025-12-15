@@ -41,8 +41,57 @@ export class UsersService {
   }
 
   async update(userId: string, updateUserDto: UpdateUserDto): Promise<User> {
+    // Normalizar datos: mapear campos con nombres diferentes al estándar
+    const normalizedData: any = { ...updateUserDto };
+
+    // Normalizar sports: sport/deportes → sports
+    if (updateUserDto.sport && !updateUserDto.sports) {
+      normalizedData.sports = [updateUserDto.sport];
+      delete normalizedData.sport;
+    } else if (updateUserDto.deportes && !updateUserDto.sports) {
+      normalizedData.sports = updateUserDto.deportes;
+      delete normalizedData.deportes;
+    } else if (updateUserDto.sports) {
+      normalizedData.sports = Array.isArray(updateUserDto.sports)
+        ? updateUserDto.sports
+        : [updateUserDto.sports];
+      delete normalizedData.sport;
+      delete normalizedData.deportes;
+    }
+
+    // Normalizar trainingDays: availableDays/available_days → trainingDays
+    if (updateUserDto.availableDays && !updateUserDto.trainingDays) {
+      normalizedData.trainingDays = updateUserDto.availableDays;
+      delete normalizedData.availableDays;
+    } else if ((updateUserDto as any).available_days && !updateUserDto.trainingDays) {
+      normalizedData.trainingDays = (updateUserDto as any).available_days;
+      delete (normalizedData as any).available_days;
+    }
+
+    // Normalizar level: fitness_level → level
+    if ((updateUserDto as any).fitness_level && !updateUserDto.level) {
+      normalizedData.level = (updateUserDto as any).fitness_level;
+      delete (normalizedData as any).fitness_level;
+    }
+
+    // Normalizar goals: asegurar que sea array
+    if (updateUserDto.goals && !Array.isArray(updateUserDto.goals)) {
+      normalizedData.goals = [updateUserDto.goals];
+    }
+
+    // Eliminar campos que no existen en el schema
+    delete normalizedData.sport;
+    delete normalizedData.deportes;
+    delete normalizedData.availableDays;
+    delete (normalizedData as any).available_days;
+    delete (normalizedData as any).fitness_level;
+    delete normalizedData.trainingDaysPerWeek;
+    delete (normalizedData as any).weekly_frequency;
+
+    console.log('📝 Normalized data for update:', normalizedData);
+
     return this.userModel
-      .findByIdAndUpdate(userId, updateUserDto, { new: true })
+      .findByIdAndUpdate(userId, normalizedData, { new: true })
       .exec();
   }
 

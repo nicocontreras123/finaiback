@@ -61,6 +61,9 @@ export class User {
 
   @Prop({ default: 10 })
   prepTimeSeconds: number;
+
+  @Prop({ default: false })
+  hasCompletedOnboarding: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
