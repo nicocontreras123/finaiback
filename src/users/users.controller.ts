@@ -11,6 +11,7 @@ export class UsersController {
 
   @Get('me')
   async getCurrentUser(@CurrentUser() user: any) {
+    console.log('Current User:', user);
     return this.usersService.findOrCreate(user.id, user.email);
   }
 
