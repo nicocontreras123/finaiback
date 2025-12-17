@@ -42,6 +42,33 @@ export class WorkoutsController {
     return this.workoutsService.findCompleted(user.id);
   }
 
+  @Get('history')
+  async getHistory(
+    @CurrentUser() user: any,
+    @Query('page') page?: string,
+    @Query('limit') limit?: string,
+  ) {
+    const pageNum = page ? parseInt(page, 10) : 1;
+    const limitNum = limit ? parseInt(limit, 10) : 20;
+    return this.workoutsService.getWorkoutHistory(user.id, pageNum, limitNum);
+  }
+
+  @Get('stats')
+  async getStats(@CurrentUser() user: any) {
+    return this.workoutsService.getWorkoutStats(user.id);
+  }
+
+  // WorkoutCompleted endpoints
+  @Post('completed')
+  async saveCompleted(
+    @CurrentUser() user: any,
+    @Body() dto: CreateWorkoutCompletedDto,
+  ) {
+    // Ensure userId matches authenticated user
+    dto.userId = user.id;
+    return this.workoutsService.saveCompletedWorkout(dto);
+  }
+
   @Get(':id')
   async findOne(@CurrentUser() user: any, @Param('id') id: string) {
     return this.workoutsService.findOne(id, user.id);
@@ -59,32 +86,5 @@ export class WorkoutsController {
   @Delete(':id')
   async remove(@CurrentUser() user: any, @Param('id') id: string) {
     return this.workoutsService.remove(id, user.id);
-  }
-
-  // WorkoutCompleted endpoints
-  @Post('completed')
-  async saveCompleted(
-    @CurrentUser() user: any,
-    @Body() dto: CreateWorkoutCompletedDto,
-  ) {
-    // Ensure userId matches authenticated user
-    dto.userId = user.id;
-    return this.workoutsService.saveCompletedWorkout(dto);
-  }
-
-  @Get('history')
-  async getHistory(
-    @CurrentUser() user: any,
-    @Query('page') page?: string,
-    @Query('limit') limit?: string,
-  ) {
-    const pageNum = page ? parseInt(page, 10) : 1;
-    const limitNum = limit ? parseInt(limit, 10) : 20;
-    return this.workoutsService.getWorkoutHistory(user.id, pageNum, limitNum);
-  }
-
-  @Get('stats')
-  async getStats(@CurrentUser() user: any) {
-    return this.workoutsService.getWorkoutStats(user.id);
   }
 }
