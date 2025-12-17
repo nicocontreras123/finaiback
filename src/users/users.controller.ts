@@ -1,8 +1,8 @@
 import { Controller, Get, Put, Body, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AuthGuard } from '../auth/guards/auth.guard';
-import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { AuthGuard } from '../shared/guards/auth.guard';
+import { CurrentUser } from '../shared/decorators/current-user.decorator';
 
 @Controller('users')
 @UseGuards(AuthGuard)

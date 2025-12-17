@@ -13,8 +13,8 @@ import { WorkoutsService } from './workouts.service';
 import { CreateWorkoutDto } from './dto/create-workout.dto';
 import { UpdateWorkoutDto } from './dto/update-workout.dto';
 import { CreateWorkoutCompletedDto } from './dto/create-workout-completed.dto';
-import { AuthGuard } from '../auth/guards/auth.guard';
-import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { AuthGuard } from '../shared/guards/auth.guard';
+import { CurrentUser } from '../shared/decorators/current-user.decorator';
 
 @Controller('workouts')
 @UseGuards(AuthGuard)
