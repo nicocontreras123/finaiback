@@ -3,7 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
-import { WorkoutsModule } from './modules/workouts/workouts.module';
+import { WorkoutsModule as WorkoutTemplatesModule } from './modules/workouts/workouts.module';
+import { WorkoutsModule } from './workouts/workouts.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { WorkoutsModule } from './modules/workouts/workouts.module';
     }),
     AuthModule,
     UsersModule,
+    WorkoutTemplatesModule,
     WorkoutsModule,
   ],
 })
