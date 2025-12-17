@@ -18,7 +18,7 @@ import { UpdateWeeklyRoutineDto } from './dto/update-weekly-routine.dto';
 import { AuthGuard } from '../../shared/guards/auth.guard';
 import { CurrentUser } from '../../shared/decorators/current-user.decorator';
 
-@Controller('workouts')
+@Controller('workout-templates')
 @UseGuards(AuthGuard)
 export class WorkoutsController {
   constructor(private readonly workoutsService: WorkoutsService) {}
