@@ -50,6 +50,10 @@ export class UpdateUserDto {
   timerSoundEnabled?: boolean;
 
   @IsOptional()
+  @IsBoolean()
+  motivationalCoachingEnabled?: boolean;
+
+  @IsOptional()
   @IsNumber()
   prepTimeMinutes?: number;
 

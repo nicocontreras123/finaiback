@@ -47,6 +47,9 @@ export class User {
   @Prop({ default: true })
   timerSoundEnabled: boolean;
 
+  @Prop({ default: false })
+  motivationalCoachingEnabled: boolean;
+
   @Prop({ default: 0 })
   prepTimeMinutes: number;
 
