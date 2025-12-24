@@ -50,6 +50,13 @@ export class User {
   @Prop({ default: false })
   motivationalCoachingEnabled: boolean;
 
+  @Prop({
+    type: String,
+    enum: ['spotify', 'youtube-music', 'apple-music', null],
+    default: null
+  })
+  preferredMusicApp: string | null;
+
   @Prop({ default: 0 })
   prepTimeMinutes: number;
 

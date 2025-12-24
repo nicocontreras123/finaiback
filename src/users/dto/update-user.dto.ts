@@ -1,4 +1,4 @@
-import { IsOptional, IsString, IsNumber, IsArray, IsBoolean } from 'class-validator';
+import { IsOptional, IsString, IsNumber, IsArray, IsBoolean, IsIn } from 'class-validator';
 
 export class UpdateUserDto {
   @IsOptional()
@@ -52,6 +52,11 @@ export class UpdateUserDto {
   @IsOptional()
   @IsBoolean()
   motivationalCoachingEnabled?: boolean;
+
+  @IsOptional()
+  @IsString()
+  @IsIn(['spotify', 'youtube-music', 'apple-music', null])
+  preferredMusicApp?: string | null;
 
   @IsOptional()
   @IsNumber()

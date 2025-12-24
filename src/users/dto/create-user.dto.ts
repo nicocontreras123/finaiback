@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString, IsNumber, IsArray, IsBoolean } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString, IsNumber, IsArray, IsBoolean, IsIn } from 'class-validator';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -52,4 +52,9 @@ export class CreateUserDto {
   @IsOptional()
   @IsBoolean()
   motivationalCoachingEnabled?: boolean;
+
+  @IsOptional()
+  @IsString()
+  @IsIn(['spotify', 'youtube-music', 'apple-music', null])
+  preferredMusicApp?: string | null;
 }
